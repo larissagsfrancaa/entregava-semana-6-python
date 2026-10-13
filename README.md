@@ -16,48 +16,6 @@ resultados diferentes conforme o tipo de conta.
 - Programação Orientada a Objetos
 - Git e GitHub
 
-## Diagrama de classes
-
-```mermaid
-classDiagram
-    class Conta {
-        <<abstract>>
-        -int _numero
-        -str _titular
-        -float _saldo
-        +depositar(valor)
-        +sacar(valor)
-        +calcular_rendimento()* 
-    }
-
-    class ContaCorrente {
-        -float _tarifa
-        +calcular_rendimento()
-    }
-
-    class ContaPoupanca {
-        -float _taxa
-        +calcular_rendimento()
-    }
-
-    class Cliente {
-        -str _nome
-        -str _email
-        +adicionar_conta(conta)
-    }
-
-    class Banco {
-        -str nome
-        +cadastrar_cliente(cliente)
-        +cadastrar_conta(conta, cliente)
-    }
-
-    Conta <|-- ContaCorrente
-    Conta <|-- ContaPoupanca
-    Cliente "1" o-- "0..*" Conta
-    Banco o-- Cliente
-    Banco o-- Conta
-```
 
 ## Conceitos aplicados
 
