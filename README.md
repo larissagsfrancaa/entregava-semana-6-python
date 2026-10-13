@@ -1,83 +1,43 @@
-# Sistema de Gerenciamento OO em Python 🚀
-### Entregável da Semana 06 - Desafio Sprint 6
+Sistema Bancário com Programação Orientada a Objetos
+Sobre o projeto
 
-Este projeto consiste na finalização de um **Sistema Completo Orientado a Objetos** desenvolvido em Python, aplicando de forma prática os conceitos de classes, objetos, encapsulamento, herança, polimorfismo, classes abstratas e métodos especiais (Dunder).
+Este projeto foi desenvolvido em Python para praticar os conceitos de Programação Orientada a Objetos (POO).
 
----
+O sistema permite cadastrar clientes e contas bancárias, realizar depósitos e saques, validar dados e calcular resultados diferentes conforme o tipo de conta.
 
-## 📊 Diagrama de Classes (Mermaid)
+Tecnologias utilizadas
 
-```mermaid
-classDiagram
-    class Conta {
-        <<Abstract>>
-        - str titular
-        - float saldo
-        + __init__(titular, saldo inicial)
-        + depositar(valor)* void
-        + sacar(valor)* bool
-        + exibir_detalhes()* void
-    }
+Python 3
+Programação Orientada a Objetos
+Git e GitHub
+Diagrama de classes
 
-    class ContaCorrente {
-        - float limite
-        + __init__(titular, saldo inicial, limite)
-        + sacar(valor) bool
-        + exibir_detalhes() void
-    }
 
-    class ContaPoupanca {
-        - float taxa_rendimento
-        + __init__(titular, saldo inicial, taxa_rendimento)
-        + calcular_preco_final() void
-        + exibir_detalhes() void
-    }
+Conceitos aplicados
 
-    class ContaEmpresarial {
-        - float limite_emprestimo
-        + __init__(titular, saldo inicial, limite_emprestimo)
-        + realizar_emprestimo(valor) void
-        + exibir_detalhes() void
-    }
+Abstração: a classe Conta define um modelo geral.
+Encapsulamento: propriedades protegem os atributos.
+Herança: ContaCorrente e ContaPoupanca herdam de Conta.
+Polimorfismo: cada tipo de conta implementa seu cálculo.
+Composição: clientes possuem contas associadas.
+Métodos especiais: uso de init, str, repr e eq.
+Validações
 
-    Conta <|-- ContaCorrente : Herança (é um)
-    Conta <|-- ContaPoupanca : Herança (é um)
-    Conta <|-- ContaEmpresarial : Herança (é um)
-```
+O sistema impede saldos negativos, depósitos e saques inválidos, tarifas negativas, taxas fora do intervalo permitido e e-mails em formato inválido.
 
----
+As propriedades validam os dados antes de armazená-los.
 
-## 📋 Justificativas de Modelagem e Decisões Técnicas
+Como executar
 
-### 1. Herança vs. Composição
-Seguindo a regra de ouro e os princípios de design de software (GoF), a **Herança** foi utilizada estritamente onde a relação lógica é clara de **"é um"**:
-* `ContaCorrente` **é uma** `Conta`.
-* `ContaPoupanca` **é uma** `Conta`.
+Instale o Python 3.
+Clone ou baixe este repositório.
+Abra a pasta no terminal.
+Execute:
+python main.py
+Testes e demonstração
 
-Essa abordagem permitiu o reaproveitamento de código e a definição de um contrato claro a partir de uma classe base. Componentes que não configuram uma especialização direta usam composição ou propriedades locais para evitar o acoplamento excessivo.
+O programa cria dez clientes e dez contas, demonstra o polimorfismo e trata exceções com try/except.
 
-### 2. Classes Abstratas e Polimorfismo
-A classe principal `Conta` foi definida como uma **Classe Abstrata** utilizando o módulo `abc` (`ABC` e `@abstractmethod`).
-* **Polimorfismo:** Método sobrescrito nas classes filhas (ex: `exibir_detalhes()` ou métodos de transação específica), permitindo que objetos de classes diferentes respondam à mesma chamada de formas distintas e apropriadas para o seu contexto.
+Autoria
 
-### 3. Encapsulamento com `@property`
-Para proteger o estado interno dos objetos e garantir que nenhum dado inválido modifique os atributos diretamente, foi aplicado o encapsulamento com getters e setters via `@property`:
-* **Validações Aplicadas:** Uso do `@property.setter` para impedir a atribuição de saldos negativos arbitrários, nomes de titulares vazios ou formatos numéricos incorretos. Isso garante a consistência do objeto desde a sua inicialização.
-
-### 4. Construtor e Métodos Especiais (Dunder)
-* **`__init__`:** Inicialização de atributos com valores padronizados de forma segura (usando `None` quando necessário, evitando mutabilidade indesejada em coleções).
-* **`super().__init__()`:** Chamada explícita nas classes filhas para reaproveitar o código de inicialização da classe mãe.
-* **`__str__` e `__repr__`:** Implementados em todas as classes para fornecer uma representação textual legível e amigável para o usuário e para o desenvolvedor durante a depuração.
-
----
-
-## 🛠️ Padrões de Código Adotados
-
-* **PascalCase:** Utilizado estritamente na nomeação de todas as Classes.
-* **snake_case:** Utilizado para métodos, funções e variáveis.
-* **PEP 8:** Adesão estrita às boas práticas de estilo do Python, incluindo o uso de *Docstrings* explicativas em todas as classes e métodos principais.
-
----
-
-## 🧪 Testes e Demonstração
-O script de execução principal instancia **pelo menos 10 objetos** distintos para preencher e validar o modelo de negócios do ecossistema. Ele realiza iterações polimórficas sobre coleções de objetos e implementa blocos `try/except` robustos para capturar e tratar entradas inválidas de forma elegante, sem interromper o fluxo do sistema.
+Projeto acadêmico desenvolvido para praticar POO em Python.
