@@ -1,43 +1,112 @@
-Sistema Bancário com Programação Orientada a Objetos
-Sobre o projeto
+# Sistema Bancário com Programação Orientada a Objetos
 
-Este projeto foi desenvolvido em Python para praticar os conceitos de Programação Orientada a Objetos (POO).
+## 💻 Sobre o projeto
 
-O sistema permite cadastrar clientes e contas bancárias, realizar depósitos e saques, validar dados e calcular resultados diferentes conforme o tipo de conta.
+Este projeto foi desenvolvido em Python para praticar os conceitos de **Programação Orientada a Objetos (POO)**.
 
-Tecnologias utilizadas
+O sistema permite cadastrar clientes e contas bancárias, realizar depósitos e saques, validar dados e calcular resultados diferentes conforme o tipo de conta cadastrada.
 
-Python 3
-Programação Orientada a Objetos
-Git e GitHub
-Diagrama de classes
+---
 
+## 🛠️ Tecnologias utilizadas
 
-Conceitos aplicados
+* **Python 3**
+* **Programação Orientada a Objetos (POO)**
+* **Git e GitHub**
 
-Abstração: a classe Conta define um modelo geral.
-Encapsulamento: propriedades protegem os atributos.
-Herança: ContaCorrente e ContaPoupanca herdam de Conta.
-Polimorfismo: cada tipo de conta implementa seu cálculo.
-Composição: clientes possuem contas associadas.
-Métodos especiais: uso de init, str, repr e eq.
-Validações
+---
 
-O sistema impede saldos negativos, depósitos e saques inválidos, tarifas negativas, taxas fora do intervalo permitido e e-mails em formato inválido.
+## 📊 Diagrama de classes
 
-As propriedades validam os dados antes de armazená-los.
+```mermaid
+classDiagram
+    class Conta {
+        <<abstract>>
+        -int _numero
+        -str _titular
+        -float _saldo
+        +depositar(valor) void
+        +sacar(valor) bool
+        +calcular_rendimento()* float
+    }
 
-Como executar
+    class ContaCorrente {
+        -float _tarifa
+        +calcular_rendimento() float
+    }
 
-Instale o Python 3.
-Clone ou baixe este repositório.
-Abra a pasta no terminal.
-Execute:
+    class ContaPoupanca {
+        -float _taxa
+        +calcular_rendimento() float
+    }
+
+    class Cliente {
+        -str _nome
+        -str _email
+        +adicionar_conta(conta) void
+    }
+
+    class Banco {
+        -str nome
+        +cadastrar_cliente(cliente) void
+        +cadastrar_conta(conta, cliente) void
+    }
+
+    Conta <|-- ContaCorrente : Herança
+    Conta <|-- ContaPoupanca : Herança
+    Cliente "1" o-- "0..*" Conta : Composição
+    Banco o-- Cliente
+    Banco o-- Conta
+```
+
+---
+
+## 🧠 Conceitos aplicados
+
+* **Abstração:** A classe `Conta` define um modelo geral e abstrato para os outros tipos de conta.
+* **Encapsulamento:** Propriedades (`@property`) e métodos de acesso protegem os atributos internos contra modificações inválidas.
+* **Herança:** As classes `ContaCorrente` e `ContaPoupanca` herdam os atributos e métodos base da classe mãe `Conta`.
+* **Polimorfismo:** Cada tipo de conta implementa seu próprio cálculo de rendimento ou desconto de forma personalizada.
+* **Composição:** Os clientes possuem contas associadas e gerenciadas dentro de sua estrutura.
+* **Métodos especiais:** Uso dos dunder methods `__init__`, `__str__`, `__repr__` e `__eq__` para total integração com o ecossistema Python.
+
+---
+
+## 🛡️ Validações
+
+O sistema possui regras estritas de negócios e impede as seguintes operações:
+* Saldos negativos arbitrários.
+* Depósitos e saques com valores inválidos (menores ou iguais a zero).
+* Tarifas negativas em contas correntes.
+* Taxas de rendimento fora do intervalo permitido para contas poupança.
+* E-mails em formato inválido.
+
+As propriedades atuam como barreiras de segurança, validando os dados antes de armazená-los nos objetos.
+
+---
+
+## 🚀 Como executar
+
+1. Certifique-se de ter o **Python 3** instalado em sua máquina.
+2. Faça o clone ou o download deste repositório.
+3. Abra a pasta do projeto no terminal ou no VS Code.
+4. Execute o seguinte comando:
+
+```bash
 python main.py
-Testes e demonstração
+```
 
-O programa cria dez clientes e dez contas, demonstra o polimorfismo e trata exceções com try/except.
+---
 
-Autoria
+## 🧪 Testes e demonstração
 
-Projeto acadêmico desenvolvido para praticar POO em Python.
+O script de execução principal simula um ambiente de produção real onde:
+* O programa cria **dez clientes** e **dez contas**.
+* Demonstra o **polimorfismo** aplicando os rendimentos e tarifas em lote.
+* Trata exceções em tempo de execução com blocos `try/except` para garantir que o sistema não caia ao receber dados inválidos.
+
+---
+
+## ✍️ Autoria
+
+Projeto acadêmico desenvolvido de forma prática para consolidação dos conceitos de POO em Python.
